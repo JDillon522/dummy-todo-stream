@@ -6,7 +6,7 @@ import {
   WsResponse,
 } from '@nestjs/websockets';
 import { Server } from 'http';
-import { Observable, from, map, interval, timeInterval } from 'rxjs';
+import { Observable, from, map, interval, timeInterval, first } from 'rxjs';
 import { dummyTasks, dummyUsers } from './dummyTasks';
 import { sample } from 'lodash';
 
@@ -36,8 +36,6 @@ export class EventsGateway {
 
           return { event: 'events', data: {text: `From ${user}:  ${task}`}}
         }
-
-        return {}
       })
     )
   }

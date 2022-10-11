@@ -14,6 +14,7 @@ import { sample } from 'lodash';
   cors: {
     origin: '*',
   },
+  transports: ['websocket']
 })
 export class EventsGateway {
   @WebSocketServer()
@@ -21,6 +22,7 @@ export class EventsGateway {
 
   @SubscribeMessage('events')
   public dummyTasks(@MessageBody() data: any): Observable<any> {
+    console.log('Hit events')
     return interval(+(process.env.INTERVAL || '5000')).pipe(
       timeInterval(),
       map((val) => {
